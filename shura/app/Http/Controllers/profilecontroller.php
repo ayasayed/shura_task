@@ -38,15 +38,15 @@ class profilecontroller extends Controller
           $flag=true;
          return back()->with('e',"success!!");
         }
- ///////////
+ ///////////delete specific employee
 
         public function delete($id){
 
-             $employee=Employee::find($id);//->delete();
+             $employee=Employee::find($id);
                  $childs=$employee->childs;
-            // return back();
-             if(count($employee->childs)>0){
-                foreach($childs as $c ){
+
+             if(count($employee->childs)>0){  //if employee is not leaf node ( supervisor)
+                foreach($childs as $c ){      //to each child make childs belong to the supervisor of this employee
                     $c->sub_id=$employee->sub_id;
                     $c->save();
                  }
@@ -56,7 +56,7 @@ class profilecontroller extends Controller
                }
              return back();
         }
-
+     //edit employee info
         public function edit(Request $request,$id)
         {
             if($request->isMethod('post')){

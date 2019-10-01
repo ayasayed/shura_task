@@ -15,6 +15,8 @@ class Employee extends Model
      *
      * @return string
     */
+    // this function to find the employees below this supervisor(employee)
+    //indicate the recursive relation
     public function childs() {
         return $this->hasMany('App\Employee','sub_id','id') ;
     }

@@ -13,6 +13,7 @@ class checkuser
      * @param  \Closure  $next
      * @return mixed
      */
+    // to prevent routing to websites page without login(Authentication)
     public function handle($request, Closure $next)
     {
         if($request->session()->get('info') == null){

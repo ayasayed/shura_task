@@ -15,9 +15,9 @@ use Auth;
 
 class logincontroller extends Controller
 {
-    //
+    //check if user have permission to log in website
     public function checklogin(Request $req){
-        $this->validate($req,[
+        $this->validate($req,[  //validation for username and password
             'username'=>'required',
             'password'=>'required'
         ],
@@ -33,11 +33,12 @@ class logincontroller extends Controller
          $checklogin=DB::table("employees")->where(['username'=>$username,'password'=>$password])->get();
 
          if(count($checklogin) > 0){
+             //start session
             $req->session()->put('info',$req->input());
             $info= $req->session()->get('info');
             print_r($info['username']);
          if ($info['username']==$username){
-            return redirect('successlogin/'.$username);
+            return redirect('successlogin/'.$username);//to go to profile page
          }else{
             return redirect('/');
          }
@@ -45,7 +46,7 @@ class logincontroller extends Controller
 
          }
               else{
-                return back()->with('error','Faild to Login !!');
+                return back()->with('error','Faild to Login !!'); //to return back to login page if login field
           }
 
         }
@@ -62,7 +63,7 @@ $allemployees=Employee::pluck('title','id')->all();
    }
 
     function logout(Request $req){
-       $req->session()->flush();
+       $req->session()->flush();  //destroy session to logout and return back to login page
         return redirect("/");
     }
 }
