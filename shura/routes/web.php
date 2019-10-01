@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,6 +12,23 @@
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+
+
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('login');});
+Route::post('/checklogin','logincontroller@checklogin');
+Route::get('/successlogin/{name}','logincontroller@successlogin')->middleware('checkuser');
+
+Route::get('/logout','logincontroller@logout');
+
+Route::post('/successlogin/addNewEmp','profilecontroller@addNewEmp');
+Route::get('/successlogin/delete/{id}','profilecontroller@delete');
+
+Route::get('/successlogin/edit/{id}','profilecontroller@edit');
+
+Route::post('/successlogin/edit/{id}','profilecontroller@edit');
+
