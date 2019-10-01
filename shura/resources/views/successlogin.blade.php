@@ -155,7 +155,8 @@
                             <a  style="text-decoration: none;color:red; font-size:20px"href="delete/{{$employee->id}}"><span aria-hidden="true">&times;</span></a>
                             <a  style="text-decoration: none;color:grean;"href="edit/{{$employee->id}}"><span >Edit</span></a>
 				                <li>
-				                    {{ $employee->username }}
+                                    <span>{{ $employee->username }}</span>
+                                    <span style="color:red">Id:{{ $employee->id }}</span>
 
 				                    @if(count($employee->childs))
 				                        @include('manageChild',['childs' => $employee->childs])
